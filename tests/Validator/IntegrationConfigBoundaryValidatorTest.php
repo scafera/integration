@@ -29,7 +29,7 @@ class IntegrationConfigBoundaryValidatorTest extends TestCase
         file_put_contents($this->tmpDir . '/src/Integration/PaymentGateway.php', <<<'PHP'
         <?php
         namespace App\Integration;
-        use Scafera\Integration\Integration;
+        use Scafera\Integration\Attribute\Integration;
         final class PaymentGateway {
             public function __construct(
                 #[Integration('stripe')]
@@ -49,7 +49,7 @@ class IntegrationConfigBoundaryValidatorTest extends TestCase
         file_put_contents($this->tmpDir . '/src/Service/OrderService.php', <<<'PHP'
         <?php
         namespace App\Service;
-        use Scafera\Integration\Integration;
+        use Scafera\Integration\Attribute\Integration;
         final class OrderService {
             public function __construct(
                 #[Integration('stripe', 'contract_id')]
@@ -70,7 +70,7 @@ class IntegrationConfigBoundaryValidatorTest extends TestCase
         file_put_contents($this->tmpDir . '/src/Controller/OrderController.php', <<<'PHP'
         <?php
         namespace App\Controller;
-        use Scafera\Integration\Integration;
+        use Scafera\Integration\Attribute\Integration;
         final class OrderController {
             public function __construct(
                 #[Integration('stripe', 'api_version')]
@@ -115,7 +115,7 @@ class IntegrationConfigBoundaryValidatorTest extends TestCase
 
         file_put_contents($this->tmpDir . '/src/Service/Bad1.php', <<<'PHP'
         <?php
-        use Scafera\Integration\Integration;
+        use Scafera\Integration\Attribute\Integration;
         class Bad1 {
             public function __construct(
                 #[Integration('stripe', 'key')]
@@ -126,7 +126,7 @@ class IntegrationConfigBoundaryValidatorTest extends TestCase
 
         file_put_contents($this->tmpDir . '/src/Controller/Bad2.php', <<<'PHP'
         <?php
-        use Scafera\Integration\Integration;
+        use Scafera\Integration\Attribute\Integration;
         class Bad2 {
             public function __construct(
                 #[Integration('mailgun', 'domain')]

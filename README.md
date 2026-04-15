@@ -74,7 +74,7 @@ A gateway is one class per external system with business-level methods:
 namespace App\Integration\Stripe;
 
 use Scafera\Integration\HttpClient;
-use Scafera\Integration\Integration;
+use Scafera\Integration\Attribute\Integration;
 
 final class PaymentGateway
 {
@@ -158,7 +158,7 @@ The gateway receives config values alongside the `HttpClient`:
 namespace App\Integration\LinkedIn;
 
 use Scafera\Integration\HttpClient;
-use Scafera\Integration\Integration;
+use Scafera\Integration\Attribute\Integration;
 
 final class PremiumGateway
 {

@@ -38,7 +38,7 @@ class UnusedIntegrationConfigValidatorTest extends TestCase
         file_put_contents($this->tmpDir . '/src/Integration/LinkedInGateway.php', <<<'PHP'
         <?php
         namespace App\Integration;
-        use Scafera\Integration\Integration;
+        use Scafera\Integration\Attribute\Integration;
         final class LinkedInGateway {
             public function __construct(
                 #[Integration('linkedin')]
@@ -66,7 +66,7 @@ class UnusedIntegrationConfigValidatorTest extends TestCase
         file_put_contents($this->tmpDir . '/src/Integration/LinkedInGateway.php', <<<'PHP'
         <?php
         namespace App\Integration;
-        use Scafera\Integration\Integration;
+        use Scafera\Integration\Attribute\Integration;
         final class LinkedInGateway {
             public function __construct(
                 #[Integration('linkedin')]
@@ -146,7 +146,7 @@ class UnusedIntegrationConfigValidatorTest extends TestCase
         file_put_contents($this->tmpDir . '/src/Integration/PaymentGateway.php', <<<'PHP'
         <?php
         namespace App\Integration;
-        use Scafera\Integration\Integration;
+        use Scafera\Integration\Attribute\Integration;
         final class PaymentGateway {
             public function __construct(
                 #[Integration('stripe')]

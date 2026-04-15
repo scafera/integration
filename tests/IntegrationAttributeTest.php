@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Scafera\Integration\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Scafera\Integration\Integration;
+use Scafera\Integration\Attribute\Integration;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 class IntegrationAttributeTest extends TestCase

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Scafera\Integration;
+namespace Scafera\Integration\Attribute;
 
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
