@@ -9,6 +9,11 @@ use Scafera\Kernel\Tool\FileFinder;
 
 final class GatewayNamingValidator implements ValidatorInterface
 {
+    public function getId(): string
+    {
+        return 'integration.gateway-naming';
+    }
+
     public function getName(): string
     {
         return 'Integration classes end with Gateway';

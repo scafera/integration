@@ -9,6 +9,11 @@ use Scafera\Kernel\Tool\FileFinder;
 
 final class HttpClientBoundaryValidator implements ValidatorInterface
 {
+    public function getId(): string
+    {
+        return 'integration.http-client-boundary';
+    }
+
     public function getName(): string
     {
         return 'HttpClient only used in Integration layer';

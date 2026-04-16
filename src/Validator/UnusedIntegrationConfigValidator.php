@@ -10,6 +10,11 @@ use Symfony\Component\Yaml\Yaml;
 
 final class UnusedIntegrationConfigValidator implements ValidatorInterface
 {
+    public function getId(): string
+    {
+        return 'integration.unused-config';
+    }
+
     public function getName(): string
     {
         return 'All integration config values are used in Gateway classes';

@@ -9,6 +9,11 @@ use Symfony\Component\Yaml\Yaml;
 
 final class LocalConfigAdvisor implements AdvisorInterface
 {
+    public function getId(): string
+    {
+        return 'integration.local-config';
+    }
+
     public function getName(): string
     {
         return 'Integration local config has matching placeholders';

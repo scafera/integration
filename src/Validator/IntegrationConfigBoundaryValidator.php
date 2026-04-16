@@ -9,6 +9,11 @@ use Scafera\Kernel\Tool\FileFinder;
 
 final class IntegrationConfigBoundaryValidator implements ValidatorInterface
 {
+    public function getId(): string
+    {
+        return 'integration.config-boundary';
+    }
+
     public function getName(): string
     {
         return 'Integration config only used in Gateway classes';

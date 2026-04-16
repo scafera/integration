@@ -9,6 +9,11 @@ use Scafera\Kernel\Tool\FileFinder;
 
 final class HttpClientLeakageValidator implements ValidatorInterface
 {
+    public function getId(): string
+    {
+        return 'integration.http-client-leakage';
+    }
+
     public function getName(): string
     {
         return 'No direct HTTP client usage in userland';
