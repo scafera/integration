@@ -4,11 +4,19 @@ External system communication for the Scafera framework. Provides an enforceable
 
 Internally adopts `symfony/http-client`. Userland code never imports Symfony HttpClient types — boundary enforcement blocks it at build time. All alternative HTTP mechanisms (cURL, `file_get_contents` with HTTP URLs) are also blocked.
 
+> **Provides:** External system communication for Scafera — a gateway pattern where each class wraps one third-party system with business-level methods. `HttpClient` (5 methods: get/post/put/patch/delete) and `Response` (statusCode/json/body/headers/header) are Scafera-owned types; gateways wire up via `#[Integration]`. All HTTP escape hatches (Symfony HttpClient, cURL, `file_get_contents`/`fopen` with HTTP URLs) are blocked outside `Integration/`.
+>
+> **Depends on:** A Scafera host project with an `Integration/` layer (e.g. `src/Integration/` under `App\Integration`). Per-integration config under `integration:` in `config/config.yaml`; secrets belong in `config.local.yaml` (git-ignored).
+>
+> **Extension points:**
+> - Attribute — `#[Integration('name')]` resolves to the configured `HttpClient`; `#[Integration('name', 'key')]` resolves to a per-integration config value (ADR-065)
+> - User gateways — one class per external system in `Integration/...`, class name must end with `Gateway` (enforced by `GatewayNamingValidator`), business-level methods only
+> - Config — `integration:` section in `config/config.yaml` declares each integration's `base_url`, `auth`, and any custom keys (injectable via the two-arg attribute)
+> - Testing — `HttpClient` constructor accepts an optional `HttpClientInterface` (e.g. `MockHttpClient`) for test doubles; the bundle never passes it in production
+>
+> **Not responsible for:** Raw HTTP outside `Integration/` (Symfony HttpClient, cURL, `file_get_contents`/`fopen` with HTTP URLs — blocked by `HttpClientLeakageValidator`, `HttpClientBoundaryValidator`) · auto-throwing on HTTP errors (`Response` never throws; the gateway decides) · full URLs in gateway methods (relative paths only; base URL from config) · secret storage (belongs in `config.local.yaml`, not `config.yaml`) · unused `integration:` config keys (flagged by `UnusedIntegrationConfigValidator`).
+
 This is a **capability package**. It adds optional external system integration to a Scafera project. It does not define folder structure or architectural rules — those belong to architecture packages.
-
-## Core Idea
-
-Scafera treats the HTTP client as an implementation detail. Your application code interacts with **gateways** — classes with business-level methods like `createPayment()` or `getRate()` — never making raw HTTP calls. Each gateway wraps one external system, receives a configured `HttpClient` via the `#[Integration]` attribute, and uses relative paths against a pre-configured base URL. A build-time validator enforces these boundaries: Symfony HttpClient, cURL, and HTTP-targeted `file_get_contents`/`fopen` are blocked everywhere in `src/`. The `HttpClient` class itself is only allowed inside the `Integration/` layer.
 
 ## What it provides
 
